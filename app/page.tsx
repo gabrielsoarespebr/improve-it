@@ -6,6 +6,23 @@ import SectionPanel from "@/components/SectionPanel";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { Empty } from "@/components/ui/Empty";
 
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function buildHighlightedHTML(text: string, sentence: string): string {
+  if (!sentence) return "";
+  const idx = text.lastIndexOf(sentence);
+  if (idx === -1) return "";
+  const before = escapeHtml(text.slice(0, idx)).replace(/\n/g, "<br>");
+  const match = escapeHtml(sentence).replace(/\n/g, "<br>");
+  const after = escapeHtml(text.slice(idx + sentence.length)).replace(
+    /\n/g,
+    "<br>",
+  );
+  return `<span style="color:transparent">${before}</span><mark style="background:#fef08a;border-radius:3px;color:transparent">${match}</mark><span style="color:transparent">${after}</span>`;
+}
+
 function getLastSentence(text: string): string | null {
   const t = text.trimEnd();
   if (!t) return null;
@@ -22,6 +39,7 @@ export default function Home() {
   const [suggestions, setSuggestions] = useState<Suggestions | null>(null);
   const [loading, setLoading] = useState(false);
   const [lastSentence, setLastSentence] = useState("");
+  const [highlightedSentence, setHighlightedSentence] = useState("");
   const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleChange = useCallback(
@@ -38,6 +56,7 @@ export default function Home() {
         setLastSentence(sentence);
         setLoading(true);
         setSuggestions(null);
+        setHighlightedSentence("");
 
         try {
           const res = await fetch("/api/suggestions", {
@@ -47,6 +66,7 @@ export default function Home() {
           });
           const data = await res.json();
           setSuggestions(data);
+          setHighlightedSentence(sentence);
         } catch (_) {}
 
         setLoading(false);
@@ -77,14 +97,40 @@ export default function Home() {
             <span className="font-medium tracking-widest text-gray-600 uppercase">
               Your text
             </span>
-            <textarea
-              value={text}
-              onChange={handleChange}
-              placeholder={
-                "Start writing in English or Portuguese…\n\nFinish a sentence with  .  !  or  ?  to get suggestions automatically."
-              }
-              className="h-64 bg-white border border-gray-200 rounded-xl p-5 leading-relaxed text-gray-900 resize-none outline-none focus:border-gray-400 placeholder:text-gray-300"
-            />
+            <div className="relative h-64">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 rounded-xl border border-gray-200 bg-white overflow-hidden pointer-events-none"
+              >
+                <div
+                  className="w-full h-full p-5 whitespace-pre-wrap break-words overflow-hidden"
+                  style={{
+                    fontFamily: "ui-sans-serif, system-ui, sans-serif",
+                    fontSize: "16px",
+                    lineHeight: "1.625",
+                    color: "transparent",
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: buildHighlightedHTML(text, highlightedSentence),
+                  }}
+                />
+              </div>
+              <textarea
+                value={text}
+                onChange={handleChange}
+                placeholder={
+                  "Start writing in English or Portuguese…\n\nFinish a sentence with  .  !  or  ?  to get suggestions automatically."
+                }
+                className="absolute inset-0 w-full h-full bg-transparent rounded-xl border border-gray-200 p-5 resize-none outline-none focus:border-gray-400 placeholder:text-gray-300"
+                style={{
+                  fontFamily: "ui-sans-serif, system-ui, sans-serif",
+                  fontSize: "16px",
+                  lineHeight: "1.625",
+                  color: "#111827",
+                  caretColor: "#111827",
+                }}
+              />
+            </div>
             {loading && (
               <p className="text-gray-600 flex items-center gap-1.5">
                 <span className="inline-block w-2.5 h-2.5 border border-gray-300 border-t-gray-500 rounded-full animate-spin" />

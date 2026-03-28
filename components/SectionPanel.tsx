@@ -45,7 +45,7 @@ export default function SectionPanel({
         >
           <div className="flex items-center gap-2 px-4 py-2.5 border-b border-gray-100">
             <div className={`w-2 h-2 rounded-full ${color}`} />
-            <span className="text-xs font-medium text-gray-500">{label}</span>
+            <span className="font-bold">{label}</span>
           </div>
           <div className="px-4 py-2 flex flex-col min-h-12">
             {loading && <Skeleton />}

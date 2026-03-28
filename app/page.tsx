@@ -74,7 +74,7 @@ export default function Home() {
         {/* Grammar */}
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-3">
-            <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
+            <span className="font-medium tracking-widest text-gray-600 uppercase">
               Your text
             </span>
             <textarea
@@ -83,10 +83,10 @@ export default function Home() {
               placeholder={
                 "Start writing in English or Portuguese…\n\nFinish a sentence with  .  !  or  ?  to get suggestions automatically."
               }
-              className="flex-1 bg-white border border-gray-200 rounded-xl p-5 text-[15px] leading-relaxed text-gray-900 resize-none outline-none focus:border-gray-400 placeholder:text-gray-300"
+              className="flex-1 bg-white border border-gray-200 rounded-xl p-5 leading-relaxed text-gray-900 resize-none outline-none focus:border-gray-400 placeholder:text-gray-300"
             />
             {loading && (
-              <p className="text-xs text-gray-400 flex items-center gap-1.5">
+              <p className="text-gray-600 flex items-center gap-1.5">
                 <span className="inline-block w-2.5 h-2.5 border border-gray-300 border-t-gray-500 rounded-full animate-spin" />
                 Analyzing sentence…
               </p>
@@ -95,9 +95,7 @@ export default function Home() {
           <div className="border border-gray-200 rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-2.5 border-b border-gray-100">
               <div className="w-2 h-2 rounded-full bg-red-500" />
-              <span className="text-xs font-medium text-gray-500">
-                Grammar fix
-              </span>
+              <span className="font-bold">Grammar fix</span>
             </div>
             <div className="px-4 py-3 flex flex-col gap-2 min-h-12">
               {loading && <Skeleton />}
@@ -129,7 +127,7 @@ export default function Home() {
 
         {/* Right — Suggestions */}
         <div className="flex flex-col gap-3 overflow-hidden">
-          <span className="text-xs font-medium tracking-widest text-gray-400 uppercase">
+          <span className="font-medium tracking-widest text-gray-600 uppercase">
             Suggestions
           </span>
           <SectionPanel

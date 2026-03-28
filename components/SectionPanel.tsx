@@ -1,5 +1,7 @@
 import { Suggestions } from "@/lib/types";
 import SuggestionCard from "./SuggestionCard";
+import { Skeleton } from "./ui/Skeleton";
+import { Empty } from "./ui/Empty";
 
 interface Props {
   suggestions: Suggestions | null;
@@ -26,19 +28,6 @@ const categories = [
     color: "bg-teal-500",
   },
 ] as const;
-
-export function Skeleton() {
-  return (
-    <div className="flex flex-col gap-2 py-1">
-      <div className="h-3 bg-gray-100 rounded animate-pulse w-4/5" />
-      <div className="h-3 bg-gray-100 rounded animate-pulse w-3/5" />
-    </div>
-  );
-}
-
-export function Empty({ text }: { text: string }) {
-  return <p className="text-xs text-gray-400 py-1">{text}</p>;
-}
 
 export default function SectionPanel({
   suggestions,

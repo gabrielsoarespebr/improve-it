@@ -2,7 +2,9 @@
 
 import { useState, useRef, useCallback } from "react";
 import { GrammarIssue, Suggestions } from "@/lib/types";
-import SectionPanel, { Empty, Skeleton } from "@/components/SectionPanel";
+import SectionPanel from "@/components/SectionPanel";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { Empty } from "@/components/ui/Empty";
 
 function getLastSentence(text: string): string | null {
   const t = text.trimEnd();

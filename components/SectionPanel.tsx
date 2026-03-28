@@ -1,4 +1,4 @@
-import { GrammarIssue, Suggestions } from "@/lib/types";
+import { Suggestions } from "@/lib/types";
 import SuggestionCard from "./SuggestionCard";
 
 interface Props {
@@ -27,7 +27,7 @@ const categories = [
   },
 ] as const;
 
-function Skeleton() {
+export function Skeleton() {
   return (
     <div className="flex flex-col gap-2 py-1">
       <div className="h-3 bg-gray-100 rounded animate-pulse w-4/5" />
@@ -36,7 +36,7 @@ function Skeleton() {
   );
 }
 
-function Empty({ text }: { text: string }) {
+export function Empty({ text }: { text: string }) {
   return <p className="text-xs text-gray-400 py-1">{text}</p>;
 }
 
@@ -48,33 +48,6 @@ export default function SectionPanel({
 }: Props) {
   return (
     <div className="flex flex-col gap-3 overflow-y-auto">
-      {/* Grammar */}
-      <div className="border border-gray-200 rounded-xl overflow-hidden">
-        <div className="flex items-center gap-2 px-4 py-2.5 border-b border-gray-100">
-          <div className="w-2 h-2 rounded-full bg-red-500" />
-          <span className="text-xs font-medium text-gray-500">Grammar fix</span>
-        </div>
-        <div className="px-4 py-3 flex flex-col gap-2 min-h-12">
-          {loading && <Skeleton />}
-          {!loading && !suggestions && (
-            <Empty text="Finish a sentence to see grammar feedback." />
-          )}
-          {!loading &&
-            suggestions &&
-            (!suggestions.grammar_issues ||
-            suggestions.grammar_issues.length === 0 ? (
-              <p className="text-sm text-green-600">No grammar issues found.</p>
-            ) : (
-              suggestions.grammar_issues.map((g: GrammarIssue, i: number) => (
-                <div key={i} className="text-sm">
-                  <span className="font-medium text-red-500">{g.error}</span>
-                  <span className="text-gray-600"> — {g.suggestion}</span>
-                </div>
-              ))
-            ))}
-        </div>
-      </div>
-
       {/* Rewrite categories */}
       {categories.map(({ key, label, color }) => (
         <div

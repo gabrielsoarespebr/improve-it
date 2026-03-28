@@ -69,7 +69,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-[1fr_380px] gap-6 h-[calc(100vh-3rem)]">
+      <div className="max-w-6xl mx-auto grid grid-cols-[1fr_380px] gap-6">
         {/* Left — Editor */}
         {/* Grammar */}
         <div className="flex flex-col gap-3">

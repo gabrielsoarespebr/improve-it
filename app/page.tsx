@@ -69,10 +69,10 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-6xl mx-auto grid grid-cols-[1fr_380px] gap-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-[1fr_380px] gap-6 items-start">
         {/* Left — Editor */}
         {/* Grammar */}
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 sticky top-6">
           <div className="flex flex-col gap-3">
             <span className="font-medium tracking-widest text-gray-600 uppercase">
               Your text
@@ -83,7 +83,7 @@ export default function Home() {
               placeholder={
                 "Start writing in English or Portuguese…\n\nFinish a sentence with  .  !  or  ?  to get suggestions automatically."
               }
-              className="flex-1 bg-white border border-gray-200 rounded-xl p-5 leading-relaxed text-gray-900 resize-none outline-none focus:border-gray-400 placeholder:text-gray-300"
+              className="h-64 bg-white border border-gray-200 rounded-xl p-5 leading-relaxed text-gray-900 resize-none outline-none focus:border-gray-400 placeholder:text-gray-300"
             />
             {loading && (
               <p className="text-gray-600 flex items-center gap-1.5">

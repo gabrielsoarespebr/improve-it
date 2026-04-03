@@ -13,9 +13,7 @@ interface Props {
 const categories = [
   { key: "casual", label: "Casual", color: "bg-emerald-500" },
   { key: "formal", label: "Formal", color: "bg-blue-500" },
-  { key: "longer", label: "Make longer", color: "bg-amber-500" },
   { key: "shorter", label: "Make shorter", color: "bg-pink-500" },
-  { key: "creative", label: "Creative", color: "bg-violet-500" },
   { key: "semantic_commit", label: "Semantic commit", color: "bg-orange-500" },
   {
     key: "pull_request_title",
@@ -27,6 +25,8 @@ const categories = [
     label: "Pull request description",
     color: "bg-teal-500",
   },
+  { key: "longer", label: "Make longer", color: "bg-amber-500" },
+  { key: "creative", label: "Creative", color: "bg-violet-500" },
 ] as const;
 
 export default function SectionPanel({

@@ -9,7 +9,7 @@ export default function SuggestionCard({ text, onApply }: Props) {
       <p className="flex-1 text-sm text-black leading-relaxed">{text}</p>
       <button
         onClick={() => onApply(text)}
-        className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center hover:bg-green-50 hover:border-green-400 transition-colors"
+        className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center hover:bg-green-50 hover:border-green-400 transition-colors cursor-pointer"
         title="Apply suggestion"
       >
         <svg

@@ -140,7 +140,9 @@ export default function Home() {
           </div>
           <div className="border border-gray-200 rounded-xl overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-2.5 border-b border-gray-100">
-              <div className="w-2 h-2 rounded-full bg-red-500" />
+              <div
+                className={`w-2 h-2 rounded-full ${!suggestions ? "bg-gray-400" : suggestions.grammar_issues.length > 0 ? "bg-red-500" : "bg-green-600"}`}
+              />
               <span className="font-bold">Grammar fix</span>
             </div>
             <div className="px-4 py-3 flex flex-col gap-2 min-h-12">
